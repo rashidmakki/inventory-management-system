@@ -1,0 +1,82 @@
+.navbar{
+-fx-background-color:linear-gradient(to bottom right , #2f466b, #662d60);
+}
+
+.close,.add,.save,.clear,.delete,.refresh,.print{
+-fx-background-color:linear-gradient(to bottom right , #2f466b, #662d60);
+-fx-background-radius:3px;
+-fx-cursor:hand;
+-fx-text-fill:#fff;
+}
+
+.navbutton{
+-fx-background-color:linear-gradient(to bottom right , rgba(121,172,255,0.2),  rgba(255,106,239,0.2));
+-fx-cursor:hand;
+-fx-alignment:CENTER-LEFT;
+}
+
+.navbutton:hover{
+-fx-background-color:linear-gradient(to bottom right , rgba(121,172,255,0.7),  rgba(255,106,239,0.7));
+}
+
+.dasboard_box{
+-fx-background-color:linear-gradient(to bottom left , #2f466b, #662d60);
+-fx-background-radius:30px;
+}
+
+
+/* Billing Pane */
+.table-view{
+-fx-background-color:transparent;
+-fx-border-color:linear-gradient(to bottom right , #2f466b, #662d60);
+-fx-border-radius:8px;
+-fx-padding:0px
+}
+
+.table-view .table-column{
+-fx-alignment:CENTER;
+}
+.table-view .column-header-background{
+-fx-background-color:linear-gradient(to bottom right , #2f466b, #662d60);
+-fx-background-insets:0 0 0 0;
+-fx-background-radius: 8px 8px 0px 0px;
+}
+
+.table-view .column-header,.filter{
+-fx-background-color:transparent;
+-fx-size:40;
+}
+
+.table-view .column-header .label{
+ -fx-text-fill:#fff;
+ -fx-font-family:"Arial"
+}
+
+.textfield{
+-fx-background-color:linear-gradient(to bottom,#efefef,#eee);
+-fx-border-color:linear-gradient(to bottom right, #2f466b, #662d60);
+-fx-border-width:.8px;
+-fx-font-family:"Tahoma";
+-fx-border-radius:4px;
+}
+
+.textfield:focused{
+-fx-border-width:1.8px;
+-fx-background-color:#fff;
+}
+
+.search-billing{
+-fx-background-color:transparent;
+-fx-border-color:linear-gradient(to bottom right, #2f466b, #662d60);
+-fx-border-radius:4px;
+-fx-font-size:13px;
+-fx-font-family:"Arial";
+-fx-border-width:1px;
+-fx-padding: 0px 0px 0px 28px;
+}
+
+.search-billing:focused{
+-fx-border-width:2px;
+}
+
+

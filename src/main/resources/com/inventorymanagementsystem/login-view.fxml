@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="694.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.inventorymanagementsystem.LoginController">
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="1080.0">
+         <children>
+            <AnchorPane fx:id="login_form" prefHeight="200.0" prefWidth="1080.0">
+               <children>
+                  <AnchorPane layoutX="274.0" prefHeight="694.0" prefWidth="805.0">
+                     <children>
+                        <TextField fx:id="username" layoutX="245.0" layoutY="356.0" onKeyTyped="#textfieldDesign" onMouseClicked="#textfieldDesign" onMouseDragged="#textfieldDesign" prefHeight="42.0" prefWidth="366.0" promptText="Username" styleClass="textfield-design" stylesheets="@login.css">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </TextField>
+                        <PasswordField fx:id="password" layoutX="245.0" layoutY="415.0" onKeyTyped="#textfieldDesign" onMouseClicked="#textfieldDesign" onMouseDragged="#textfieldDesign" prefHeight="42.0" prefWidth="366.0" promptText="Password" styleClass="textfield-design" stylesheets="@login.css">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </PasswordField>
+                        <Label alignment="CENTER" layoutX="345.0" layoutY="262.0" prefHeight="44.0" prefWidth="166.0" text="Login" textFill="#ec1fff">
+                           <font>
+                              <Font name="Berlin Sans FB" size="48.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="login_btn" layoutX="325.0" layoutY="484.0" mnemonicParsing="false" onAction="#login" prefHeight="50.0" prefWidth="206.0" styleClass="login-button" stylesheets="@login.css" text="Login" textFill="WHITE">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Button>
+                        <FontAwesomeIconView glyphName="USERS" layoutX="372.0" layoutY="234.0" selectionFill="#2f466b" size="98" text="" wrappingWidth="112.22855949401855" />
+                        <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="741.0" layoutY="14.0" mnemonicParsing="false" onAction="#onExit" onMouseClicked="#onExit" onMouseDragged="#onExit" prefHeight="29.0" prefWidth="50.0" styleClass="close" stylesheets="@login.css">
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="CLOSE" size="16.0" />
+                           </graphic>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="694.0" prefWidth="275.0" styleClass="login-bg" stylesheets="@login.css">
+                     <children>
+                        <Label fx:id="f_logo" layoutX="34.0" layoutY="232.0" prefHeight="190.0" prefWidth="103.0" text="F">
+                           <font>
+                              <Font name="Engravers MT" size="86.0" />
+                           </font>
+                           <textFill>
+                              <LinearGradient endX="0.7662834737492704" endY="0.6130268053076733" startY="0.999999984927561">
+                                 <stops>
+                                    <Stop>
+                                       <color>
+                                          <Color red="1.0" green="0.30980393290519714" blue="0.7607843279838562" />
+                                       </color>
+                                    </Stop>
+                                    <Stop offset="1.0">
+                                       <color>
+                                          <Color red="1.0" green="1.0" blue="1.0" />
+                                       </color>
+                                    </Stop>
+                                 </stops>
+                              </LinearGradient>
+                           </textFill>
+                        </Label>
+                        <Label fx:id="c_logo" layoutX="138.0" layoutY="238.0" prefHeight="178.0" prefWidth="94.0" text="C">
+                           <font>
+                              <Font name="Engravers MT" size="86.0" />
+                           </font>
+                           <textFill>
+                              <LinearGradient endX="0.6934865900383143" endY="0.08429115668110465" startX="0.2720306522544773">
+                                 <stops>
+                                    <Stop>
+                                       <color>
+                                          <Color red="1.0" green="0.30980393290519714" blue="0.7607843279838562" />
+                                       </color>
+                                    </Stop>
+                                    <Stop offset="1.0">
+                                       <color>
+                                          <Color red="1.0" green="1.0" blue="1.0" />
+                                       </color>
+                                    </Stop>
+                                 </stops>
+                              </LinearGradient>
+                           </textFill>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>
