@@ -6,6 +6,7 @@ module com.inventorymanagementsystem.inventorymanagementsystem {
     requires javafx.media;
     requires java.base;
 
+
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
     requires validatorfx;
@@ -13,6 +14,7 @@ module com.inventorymanagementsystem.inventorymanagementsystem {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires java.sql;
+    requires jasperreports;
 
 
     opens com.inventorymanagementsystem to javafx.fxml;

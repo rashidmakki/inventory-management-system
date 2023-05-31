@@ -5,10 +5,23 @@ import com.inventorymanagementsystem.config.Database;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JRDesignQuery;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import org.controlsfx.control.textfield.TextFields;
 
 import java.net.URL;
@@ -23,6 +36,8 @@ import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 public class DashboardController implements Initializable {
+    private double x;
+    private double y;
 
     @FXML
     private Button billing_btn;
@@ -185,6 +200,9 @@ public class DashboardController implements Initializable {
     private TableView<Sales> sales_table;
 
     @FXML
+    private Label sales_total_amount;
+
+    @FXML
     private Button purchase_btn_add;
 
     @FXML
@@ -234,6 +252,9 @@ public class DashboardController implements Initializable {
 
     @FXML
     private Label dash_total_stocks;
+
+    @FXML
+    private Button signout_btn;
 
 
     public void onExit(){
@@ -677,6 +698,22 @@ public class DashboardController implements Initializable {
 
     }
 
+    public void printBill(){
+     connection=Database.connectDB();
+     String sql="SELECT * FROM `sales` s INNER JOIN customers c ON s.cust_id=c.id and s.inv_num=(SELECT MAX(inv_num) as inv_num FROM `sales`)";
+     try{
+         JasperDesign jasperDesign= JRXmlLoader.load(ClassLoader.getSystemResource("Invoice.jrxml").getPath());
+         JRDesignQuery updateQuery=new JRDesignQuery();
+         updateQuery.setText(sql);
+         jasperDesign.setQuery(updateQuery);
+         JasperReport jasperReport= JasperCompileManager.compileReport(jasperDesign);
+         JasperPrint jasperPrint= JasperFillManager.fillReport(jasperReport,null,connection);
+         JasperViewer.viewReport(jasperPrint ,false);
+     }catch (Exception err){
+      err.printStackTrace();
+     }
+    }
+
     public void customerClearData(){
         cust_field_name.setText("");
         cust_field_phone.setText("");
@@ -833,7 +870,45 @@ public class DashboardController implements Initializable {
             alert.showAndWait();
         }
     }
+    public void printCustomersDetails(){
+        connection=Database.connectDB();
+        String sql="SELECT * FROM customers";
+        try{
+            JasperDesign jasperDesign= JRXmlLoader.load(ClassLoader.getSystemResource("customers.jrxml").getPath());
+            JRDesignQuery updateQuery=new JRDesignQuery();
+            updateQuery.setText(sql);
+            jasperDesign.setQuery(updateQuery);
+            JasperReport jasperReport= JasperCompileManager.compileReport(jasperDesign);
+            JasperPrint jasperPrint= JasperFillManager.fillReport(jasperReport,null,connection);
+            JasperViewer.viewReport(jasperPrint ,false);
+        }catch (Exception err){
+            err.printStackTrace();
+        }
+    }
+    public void getTotalSalesAmount(){
+        connection=Database.connectDB();
+        String sql="SELECT SUM(total_amount) as total_sale_amount FROM sales";
+        try{
+            statement=connection.createStatement();
+            resultSet=statement.executeQuery(sql);
+            while (resultSet.next()){
+                String result=resultSet.getString("total_sale_amount");
+                if (result == null) {
+                    sales_total_amount.setText("0.00");
+                }else{
+                    sales_total_amount.setText(result);
+                }
+            }
+        }catch (Exception err){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeight(500);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText(err.getMessage());
+            alert.showAndWait();
+        }
 
+    }
     public ObservableList<Sales> listSalesData(){
         ObservableList<Sales> salesList=FXCollections.observableArrayList();
         connection=Database.connectDB();
@@ -862,6 +937,23 @@ public class DashboardController implements Initializable {
         sales_col_date_of_sales.setCellValueFactory(new PropertyValueFactory<>("date"));
         sales_col_item_num.setCellValueFactory(new PropertyValueFactory<>("item_num"));
         sales_table.setItems(salesList);
+
+        getTotalSalesAmount();
+    }
+    public void printSalesDetails(){
+        connection=Database.connectDB();
+        String sql="SELECT * FROM sales s INNER JOIN customers c ON s.cust_id=c.id";
+        try{
+            JasperDesign jasperDesign= JRXmlLoader.load(ClassLoader.getSystemResource("sales_report.jrxml").getPath());
+            JRDesignQuery updateQuery=new JRDesignQuery();
+            updateQuery.setText(sql);
+            jasperDesign.setQuery(updateQuery);
+            JasperReport jasperReport= JasperCompileManager.compileReport(jasperDesign);
+            JasperPrint jasperPrint= JasperFillManager.fillReport(jasperReport,null,connection);
+            JasperViewer.viewReport(jasperPrint ,false);
+        }catch (Exception err){
+            err.printStackTrace();
+        }
     }
     public void getTotalPurchaseAmount(){
         connection=Database.connectDB();
@@ -886,6 +978,21 @@ public class DashboardController implements Initializable {
             alert.showAndWait();
         }
 
+    }
+    public void printPurchaseDetails(){
+        connection=Database.connectDB();
+        String sql="SELECT * FROM purchase";
+        try{
+            JasperDesign jasperDesign= JRXmlLoader.load(ClassLoader.getSystemResource("purchase_report.jrxml").getPath());
+            JRDesignQuery updateQuery=new JRDesignQuery();
+            updateQuery.setText(sql);
+            jasperDesign.setQuery(updateQuery);
+            JasperReport jasperReport= JasperCompileManager.compileReport(jasperDesign);
+            JasperPrint jasperPrint= JasperFillManager.fillReport(jasperReport,null,connection);
+            JasperViewer.viewReport(jasperPrint ,false);
+        }catch (Exception err){
+            err.printStackTrace();
+        }
     }
     public ObservableList<Purchase> listPurchaseData(){
         ObservableList<Purchase> purchaseList=FXCollections.observableArrayList();
@@ -1033,6 +1140,34 @@ public class DashboardController implements Initializable {
      getTotalStocks();
      getSalesDetailsOfThisMonth();
      getItemSoldThisMonth();
+    }
+    public void signOut(){
+        signout_btn.getScene().getWindow().hide();
+        try{
+        Parent root = FXMLLoader.load(getClass().getResource("login-view.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage=new Stage();
+            root.setOnMousePressed((event)->{
+                x=event.getSceneX();
+                y=event.getSceneY();
+            });
+            root.setOnMouseDragged((event)->{
+                stage.setX(event.getScreenX()-x);
+                stage.setY(event.getScreenY()-y);
+            });
+
+            stage.initStyle(StageStyle.TRANSPARENT);
+            stage.setScene(scene);
+            stage.show();
+        }catch (Exception err){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeight(500);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText(err.getMessage());
+            alert.showAndWait();
+        }
+
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
