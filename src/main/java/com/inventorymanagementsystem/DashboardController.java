@@ -1119,7 +1119,7 @@ public class DashboardController implements Initializable {
             while (resultSet.next()){
                 String result=resultSet.getString("total_sales_this_month");
                 if (result == null) {
-                    dash_total_sales_this_month.setText("0");
+                    dash_total_sales_this_month.setText("0.00");
                 }else{
                     dash_total_sales_this_month.setText(result);
                 }

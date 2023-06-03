@@ -16,6 +16,6 @@ Inventory management system is a desktop application that allows user to perform
 -  User has option to view the sales report along with print facility.
 -  User has option to view the purchase report as well.
 
+## Demo:
 
-
-
+[Inventory Management Application.mp4](Inventory%20Management%20Application.mp4)
