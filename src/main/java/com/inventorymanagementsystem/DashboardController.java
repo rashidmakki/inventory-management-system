@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -412,14 +413,15 @@ public class DashboardController implements Initializable {
     }
     public void getPriceOfTheItem(){
         try {
-            if (bill_item.getText().length() <= 2) {
-                return;
-            }
             Product product = productsList.stream().filter(prod -> prod.getItemNumber().equals(bill_item.getText())).findAny().get();
             System.out.println("Price " + product.getPrice());
             bill_price.setText(String.valueOf((int) product.getPrice()));
         }catch (Exception err){
-            System.out.println("Exception due to bill item number length: "+err.getMessage());
+            Alert alert=new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Exception Item Number : "+err.getMessage());
+            alert.showAndWait();
         }
     }
 
@@ -428,7 +430,11 @@ public class DashboardController implements Initializable {
         bill_price.setOnKeyPressed(event-> checkForPriceandQuantity());
         bill_price.setOnKeyTyped(event-> checkForPriceandQuantity());
         bill_quantity.setOnAction(actionEvent -> checkForPriceandQuantity());
-        bill_item.setOnKeyPressed(actionEvent ->getPriceOfTheItem());
+        bill_item.setOnKeyPressed(actionEvent ->{
+            if(actionEvent.getCode().equals(KeyCode.ENTER)) {
+                getPriceOfTheItem();
+            }
+        });
     }
     public void addBillingData(){
         if(bill_item.getText().isBlank()||bill_quantity.getSelectionModel().isEmpty()||bill_price.getText().isBlank()||bill_total_amount.getText().isBlank()){
@@ -537,7 +543,7 @@ public class DashboardController implements Initializable {
         if(num-1 < -1){
             return;
         }
-
+        bill_item.setText(billingData.getItem_number());
         bill_price.setText(String.valueOf((int)billingData.getPrice()));
         bill_total_amount.setText(String.valueOf((int)billingData.getTotal_amount()));
     }
@@ -729,6 +735,14 @@ public class DashboardController implements Initializable {
             Parent root = FXMLLoader.load(getClass().getResource("bills.fxml"));
             Scene scene = new Scene(root);
             Stage stage=new Stage();
+            root.setOnMousePressed((event)->{
+                x=event.getSceneX();
+                y=event.getSceneY();
+            });
+            root.setOnMouseDragged((event)->{
+                stage.setX(event.getScreenX()-x);
+                stage.setY(event.getScreenY()-y);
+            });
             stage.initStyle(StageStyle.TRANSPARENT);
             stage.setScene(scene);
             stage.show();
