@@ -18,4 +18,5 @@ Inventory management system is a desktop application that allows user to perform
 
 ## Demo:
 
-[Inventory Management Application.mp4](Inventory%20Management%20Application.mp4)
+https://github.com/rashidmakki/inventory-management-system/assets/52795057/3b0cdf8b-01b8-47c1-8488-2587f3426edd
+
