@@ -35,6 +35,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
+import static org.burningwave.core.assembler.StaticComponentContainer.Modules;
+
 public class DashboardController implements Initializable {
     private double x;
     private double y;
@@ -256,6 +258,7 @@ public class DashboardController implements Initializable {
     @FXML
     private Button signout_btn;
 
+    List<Product> productsList;
 
     public void onExit(){
         System.exit(0);
@@ -339,16 +342,17 @@ public class DashboardController implements Initializable {
         purchase_pane.setVisible(false);
     }
 
-    public ObservableList<String> getItemNumberList(){
-        ObservableList<String> itemNumbersList=FXCollections.observableArrayList();
+    public List<Product> getItemsList(){
+        productsList=new ArrayList<>();
         connection= Database.connectDB();
-        String sql="SELECT item_number FROM PRODUCTS";
+        String sql="SELECT * FROM PRODUCTS";
         try{
             statement=connection.createStatement();
             resultSet=statement.executeQuery(sql);
+            Product product;
             while (resultSet.next()){
-               String itemNumber=resultSet.getString("item_number");
-               itemNumbersList.add(itemNumber);
+                product=new Product(Integer.parseInt(resultSet.getString("id")),resultSet.getString("item_number"),resultSet.getString("item_group"),Integer.parseInt(resultSet.getString("quantity")),Double.parseDouble(resultSet.getString("price")));
+                productsList.add(product);
             }
         }catch (Exception err){
             Alert alert=new Alert(Alert.AlertType.ERROR);
@@ -358,7 +362,7 @@ public class DashboardController implements Initializable {
             alert.setContentText(err.getMessage());
             alert.showAndWait();
         }
-        return itemNumbersList;
+        return productsList;
     }
 
     public void setInvoiceNum(){
@@ -385,11 +389,10 @@ public class DashboardController implements Initializable {
         }
     }
     public void setAutoCompleteItemNumber(){
-        ObservableList<String> itemNumberList=getItemNumberList();
-        List<String> list=itemNumberList.stream().collect(Collectors.toList());
-        String listarr[]=new String[list.size()];
-        listarr=list.toArray(listarr);
-        TextFields.bindAutoCompletion(bill_item,listarr);
+        getItemsList();
+        List<String> itemNumberList=productsList.stream().map(Product::getItemNumber).collect(Collectors.toList());
+        ObservableList<String> observableItemList=FXCollections.observableArrayList(itemNumberList);
+        TextFields.bindAutoCompletion(bill_item,observableItemList);
     }
 
     public void comboBoxQuantity(){
@@ -401,23 +404,31 @@ public class DashboardController implements Initializable {
         bill_quantity.setItems(comboList);
     }
     public void checkForPriceandQuantity(){
-        if(!bill_price.getText().isBlank()&& !bill_quantity.getValue().toString().isBlank()){
+        if(!bill_price.getText().isBlank()&& !bill_quantity.getSelectionModel().isEmpty()){
             bill_total_amount.setText(String.valueOf(Integer.parseInt(bill_price.getText())*Integer.parseInt(bill_quantity.getValue().toString())));
         }else{
             bill_total_amount.setText("0");
         }
     }
-    public void onInputTextChanged(){
-        bill_price.setOnKeyReleased(event->{
-           checkForPriceandQuantity();
-        });
-        bill_price.setOnKeyPressed(event->{
-            checkForPriceandQuantity();
-        });
-        bill_price.setOnKeyTyped(event->{
-            checkForPriceandQuantity();
-        });
+    public void getPriceOfTheItem(){
+        try {
+            if (bill_item.getText().length() <= 2) {
+                return;
+            }
+            Product product = productsList.stream().filter(prod -> prod.getItemNumber().equals(bill_item.getText())).findAny().get();
+            System.out.println("Price " + product.getPrice());
+            bill_price.setText(String.valueOf((int) product.getPrice()));
+        }catch (Exception err){
+            System.out.println("Exception due to bill item number length: "+err.getMessage());
+        }
+    }
 
+    public void onInputTextChanged(){
+        bill_price.setOnKeyReleased(event-> checkForPriceandQuantity());
+        bill_price.setOnKeyPressed(event-> checkForPriceandQuantity());
+        bill_price.setOnKeyTyped(event-> checkForPriceandQuantity());
+        bill_quantity.setOnAction(actionEvent -> checkForPriceandQuantity());
+        bill_item.setOnKeyPressed(actionEvent ->getPriceOfTheItem());
     }
     public void addBillingData(){
         if(bill_item.getText().isBlank()||bill_quantity.getSelectionModel().isEmpty()||bill_price.getText().isBlank()||bill_total_amount.getText().isBlank()){
@@ -713,7 +724,23 @@ public class DashboardController implements Initializable {
       err.printStackTrace();
      }
     }
-
+    public void searchForBills(){
+        try{
+            Parent root = FXMLLoader.load(getClass().getResource("bills.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage=new Stage();
+            stage.initStyle(StageStyle.TRANSPARENT);
+            stage.setScene(scene);
+            stage.show();
+        }catch (Exception err){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeight(500);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText(err.getMessage());
+            alert.showAndWait();
+        }
+    }
     public void customerClearData(){
         cust_field_name.setText("");
         cust_field_phone.setText("");
@@ -1169,8 +1196,12 @@ public class DashboardController implements Initializable {
         }
 
     }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        // Exports all modules to other modules
+        Modules.exportAllToAll();
+
         setUsername();
         activateDashboard();
 
@@ -1178,7 +1209,7 @@ public class DashboardController implements Initializable {
         showDashboardData();
 
 //      BILLING PANE
-//        setAutoCompleteItemNumber();
+        setAutoCompleteItemNumber();
         comboBoxQuantity();
         setInvoiceNum();
         showBillingData();

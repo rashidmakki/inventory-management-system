@@ -15,7 +15,7 @@ module com.inventorymanagementsystem.inventorymanagementsystem {
     requires eu.hansolo.tilesfx;
     requires java.sql;
     requires jasperreports;
-
+    requires org.burningwave.core;
 
     opens com.inventorymanagementsystem to javafx.fxml;
     exports com.inventorymanagementsystem;

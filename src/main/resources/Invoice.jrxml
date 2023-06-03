@@ -88,8 +88,9 @@
 	<subDataset name="itemlist" uuid="918e2d3e-789f-4e8f-983f-b56d38830d92">
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter (2)"/>
+		<parameter name="InvNum" class="java.lang.String"/>
 		<queryString language="SQL">
-			<![CDATA[SELECT * FROM `sales` s INNER JOIN customers c ON s.cust_id=c.id and s.inv_num=(SELECT MAX(inv_num) as inv_num FROM `sales`);]]>
+			<![CDATA[SELECT * FROM `sales` s INNER JOIN customers c ON s.cust_id=c.id and s.inv_num=$P{InvNum};]]>
 		</queryString>
 		<field name="item_number" class="java.lang.String">
 			<property name="com.jaspersoft.studio.field.name" value="item_number"/>
@@ -118,9 +119,19 @@
 	<queryString language="SQL">
 		<![CDATA[SELECT * FROM `sales` s INNER JOIN customers c ON s.cust_id=c.id and s.inv_num=(SELECT MAX(inv_num) as inv_num FROM `sales`);]]>
 	</queryString>
+	<field name="id" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="id"/>
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="sales"/>
+	</field>
 	<field name="inv_num" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="inv_num"/>
 		<property name="com.jaspersoft.studio.field.label" value="inv_num"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="sales"/>
+	</field>
+	<field name="cust_id" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="cust_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="cust_id"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="sales"/>
 	</field>
 	<field name="price" class="java.lang.Double">
@@ -147,6 +158,11 @@
 		<property name="com.jaspersoft.studio.field.name" value="item_number"/>
 		<property name="com.jaspersoft.studio.field.label" value="item_number"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="sales"/>
+	</field>
+	<field name="COLUMN_9" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="id"/>
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="customers"/>
 	</field>
 	<field name="Name" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="Name"/>
@@ -257,7 +273,10 @@
 					<property name="com.jaspersoft.studio.table.style.detail" value="Table 1_TD"/>
 				</reportElement>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-					<datasetRun subDataset="itemlist" uuid="c9e9a1ff-5dbb-4f4b-9a88-a376cea5be27">
+					<datasetRun subDataset="itemlist" uuid="3f6d2420-16c1-4620-879a-7c5d5659b59e">
+						<datasetParameter name="InvNum">
+							<datasetParameterExpression><![CDATA[$F{inv_num}]]></datasetParameterExpression>
+						</datasetParameter>
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					</datasetRun>
 					<jr:column width="130" uuid="9e0899bc-cbd0-42d3-9626-68e10aff88d7">
