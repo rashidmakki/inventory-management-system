@@ -8,6 +8,8 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
+import static org.burningwave.core.assembler.StaticComponentContainer.Modules;
+
 public class Application extends javafx.application.Application {
 
     private double x;
