@@ -40,6 +40,7 @@ public class LoginController implements Initializable {
     @FXML
     private AnchorPane login_form;
 
+
     private Connection connection;
 
     private Statement statement;
@@ -73,7 +74,7 @@ public class LoginController implements Initializable {
     }
 
     public void login(){
-        connection= Database.connectDB();
+        connection= Database.getInstance().connectDB();
         String sql="SELECT * FROM users WHERE username=? and password=?";
         try{
             preparedStatement=connection.prepareStatement(sql);

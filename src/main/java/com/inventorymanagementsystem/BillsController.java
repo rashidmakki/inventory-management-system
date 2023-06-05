@@ -48,11 +48,10 @@ public class BillsController implements Initializable {
     }
 
     public void searchAndPrintBillDetails(){
-        connection= Database.connectDB();
+        connection= Database.getInstance().connectDB();
         String sql="SELECT * FROM `sales` s INNER JOIN customers c ON s.cust_id=c.id and s.inv_num='" +bills_search_invoice_number.getText() + "'";
-        System.out.println(sql);
         try{
-            JasperDesign jasperDesign= JRXmlLoader.load(ClassLoader.getSystemResource("Invoice.jrxml").getPath());
+            JasperDesign jasperDesign= JRXmlLoader.load(this.getClass().getClassLoader().getResourceAsStream("jasper-reports/Invoice.jrxml"));
             JRDesignQuery updateQuery=new JRDesignQuery();
             updateQuery.setText(sql);
             jasperDesign.setQuery(updateQuery);

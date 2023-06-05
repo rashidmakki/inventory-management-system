@@ -4,7 +4,7 @@ Inventory management system is a desktop application that allows user to perform
 ## Requirement :
 
 **Functional Requirement :**
-- Java JDK 11
+- Java JDK 11.0.12
 - MYSQL
 
 **System Features:**

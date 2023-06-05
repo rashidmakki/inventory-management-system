@@ -1,4 +1,4 @@
-module com.inventorymanagementsystem.inventorymanagementsystem {
+module com.inventorymanagementsystem{
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
@@ -23,4 +23,6 @@ module com.inventorymanagementsystem.inventorymanagementsystem {
     opens com.inventorymanagementsystem.entity to javafx.fxml;
     exports com.inventorymanagementsystem.config;
     opens com.inventorymanagementsystem.config to javafx.fxml;
+    exports com.inventorymanagementsystem.app;
+    opens com.inventorymanagementsystem.app to javafx.fxml;
 }
