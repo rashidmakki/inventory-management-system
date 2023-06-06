@@ -19,7 +19,10 @@ Inventory Management System is a powerful desktop application developed using Ja
 - Utilized Java, JavaFX, and SQL technologies to deliver a seamless user experience and ensure efficient data management.
 
 Note: The above descriptions can be further expanded or customized based on the specific functionalities, technologies, and achievements in your application.
+
 ## Demo:
 
-https://github.com/rashidmakki/inventory-management-system/assets/52795057/3b0cdf8b-01b8-47c1-8488-2587f3426edd
+https://github.com/rashidmakki/inventory-management-system/assets/52795057/833ec1f8-9633-4464-b082-d5a9a172daa3
+
+
 
