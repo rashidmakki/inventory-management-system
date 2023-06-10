@@ -11,7 +11,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d9817e94-3970-49c2-adaf-e2027458d2ad" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/jasper-reports/Invoice.jrxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/jasper-reports/Invoice.jrxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

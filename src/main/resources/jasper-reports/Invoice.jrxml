@@ -237,19 +237,19 @@
 				<textElement>
 					<font size="19" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Fashion Club]]></text>
+				<text><![CDATA[ABC]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="95" y="55" width="205" height="15" uuid="b8cc42fd-b569-497d-834d-7e854040ad18"/>
-				<text><![CDATA[9818977363]]></text>
+				<text><![CDATA[+91234567894]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="95" y="25" width="205" height="15" uuid="c226e44d-3bb5-4145-b0b3-903bf1d79fde"/>
-				<text><![CDATA[Darbar Masjid, Naya Bazaar ]]></text>
+				<text><![CDATA[ABC Bazaar]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="95" y="40" width="205" height="15" uuid="b96f7183-44f8-43ad-ba60-43d8fbf50b6e"/>
-				<text><![CDATA[Siwan, Bihar, 841226]]></text>
+				<text><![CDATA[India (IN)]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="70" y="120" width="100" height="30" uuid="3c090731-8ec3-4289-9840-b63289159d10"/>
