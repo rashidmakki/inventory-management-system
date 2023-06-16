@@ -24,9 +24,8 @@ Note: The above descriptions can be further expanded or customized based on the 
 
 - To install all the dependencies:
 
-            ```
             mvn clean install
-            ```
+            
 - To start application using mvn command:
 
             ```
