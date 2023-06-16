@@ -36,7 +36,7 @@ Note: The above descriptions can be further expanded or customized based on the 
            
 ## Demo:
 
-https://github.com/rashidmakki/inventory-management-system/assets/52795057/833ec1f8-9633-4464-b082-d5a9a172daa3
+https://github.com/rashidmakki/inventory-management-system/assets/52795057/12cb1dbd-8858-4b94-9c96-24231a3977bd
 
 
 
