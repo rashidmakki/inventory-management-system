@@ -20,17 +20,20 @@ Inventory Management System is a powerful desktop application developed using Ja
 
 Note: The above descriptions can be further expanded or customized based on the specific functionalities, technologies, and achievements in your application.
 
-## How To Install"
+## How to install and start the application:
 
 - To install all the dependencies:
+
             ```
             mvn clean install
             ```
 - To start application using mvn command:
+
             ```
             mvn compile exec:java
             ```
 - To create executable jar file in shade directory:
+
             ```
             mvn compile package
             ```
