@@ -4,6 +4,7 @@ Inventory Management System is a powerful desktop application developed using Ja
 ## Requirement :
 
 **System Requirement :**
+
 - Java JDK 11.0.12
 - MYSQL
 - Java FX
