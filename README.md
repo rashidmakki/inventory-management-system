@@ -9,7 +9,6 @@ Inventory Management System is a powerful desktop application developed using Ja
 - Java FX
   
 **System Features:**
-
 - Implemented functionality to display sales based on month, providing users with insights into monthly sales trends.
 - Incorporated inventory management features to track and display the remaining stocks in real-time, ensuring efficient stock control. 
 - Implemented a feature to calculate and display the total number of items sold out within the current month. 
