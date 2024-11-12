@@ -21,6 +21,7 @@ Note: The above descriptions can be further expanded or customized based on the 
 
 ## How to install and start the application:
 
+
 - To install all the dependencies:
 
             mvn clean install
